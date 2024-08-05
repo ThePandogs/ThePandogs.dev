@@ -1,0 +1,32 @@
+---
+import ExperienceItem from "./ExperienceItem.astro"
+const EXPERIENCIE = [
+    {
+    date: "Actualmente...",
+    title: "Programador      Project Manager",
+    company: "ThePandogsGames",
+    description:
+      "Fundador de estudio indie de videojuegos. Mis roles actuales son programador y Project Manager de un equipo de 8 personas.",
+    link: "https://www.ThePandogsGames.com",
+  },
+  
+  {
+    date: "Actualmente...",
+    title: "Programador .NET",
+    company: "Esquío Ingeniería",
+    description:
+      "Programador en Visual Basic y C#. Desarrollando Nimo ERP con .NET utilizando Windows Forms y Windows Presentation Foundation (WPF) además de la gestión y administración de bases de datos SQL Server.",
+  },
+
+]
+---
+
+<ol class="relative mt-16">
+  {
+    EXPERIENCIE.map((experiencie) => (
+      <li class="">
+        <ExperienceItem {...experiencie} />
+      </li>
+    ))
+  }
+</ol>
