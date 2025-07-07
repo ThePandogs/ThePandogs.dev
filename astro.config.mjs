@@ -4,6 +4,7 @@ import robotsTxt from 'astro-robots-txt'
 
 export default defineConfig({
   site: 'https://ThePandogs.github.io/ThePandogs.dev/', // URL completa
-  base: '/ThePandogs.dev/',                             // nombre del repo con /
+  base: '/',                             // nombre del repo con /
   integrations: [tailwind(), robotsTxt()],
 })
+
