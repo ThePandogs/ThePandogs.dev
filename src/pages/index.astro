@@ -4,6 +4,7 @@ import Nav from "@/components/Nav.astro"
 import Hero from "@/components/Hero.astro"
 import Section from "@/components/Section.astro"
 import Experience from "@/components/Experience.astro"
+import ClientWork from "@/components/ClientWork.astro"
 import Projects from "@/components/Projects.astro"
 import About from "@/components/About.astro"
 import Contact from "@/components/Contact.astro"
@@ -21,13 +22,16 @@ import { profile } from "@/data/profile"
     <Section id="experiencia" index="01" title="Experiencia">
       <Experience />
     </Section>
-    <Section id="proyectos" index="02" title="Proyectos">
+    <Section id="clientes" index="02" title="Webs para clientes">
+      <ClientWork />
+    </Section>
+    <Section id="proyectos" index="03" title="Proyectos personales">
       <Projects />
     </Section>
-    <Section id="sobre-mi" index="03" title="Sobre mí">
+    <Section id="sobre-mi" index="04" title="Sobre mí">
       <About />
     </Section>
-    <Section id="contacto" index="04" title="Contacto">
+    <Section id="contacto" index="05" title="Contacto">
       <Contact />
     </Section>
     <Footer />
