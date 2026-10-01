@@ -2,8 +2,6 @@ import type { ImageMetadata } from "astro"
 
 import type { Lang } from "@/i18n"
 
-import appRestaurant from "@/assets/projects/app-restaurant.png"
-import fallingBlocks from "@/assets/projects/falling-blocks.png"
 import caminoGalicia from "@/assets/projects/camino-galicia.png"
 import arenasDeAlcabre from "@/assets/projects/arenas-de-alcabre.png"
 import pandogsGames from "@/assets/projects/pandogs-games.png"
@@ -158,7 +156,6 @@ export type Project = {
   /** Estado, p. ej. "En desarrollo". */
   status?: L
   image?: ImageMetadata
-  preview?: string
 }
 
 export type ClientProject = Project & {
@@ -274,8 +271,6 @@ export const projects: Project[] = [
     },
     repo: "https://github.com/ThePandogs/APP_RestaurantManagement",
     tags: ["Java", "Swing", "MySQL"],
-    image: appRestaurant,
-    preview: "projects/app-restaurant.gif",
   },
   {
     title: "Falling Blocks",
@@ -285,8 +280,6 @@ export const projects: Project[] = [
     },
     repo: "https://github.com/ThePandogs/Falling-Blocks-Game",
     tags: ["Java", "Swing"],
-    image: fallingBlocks,
-    preview: "projects/falling-blocks.gif",
   },
   {
     title: "AgentOS",
