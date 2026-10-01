@@ -1,0 +1,46 @@
+---
+import Icon from "./Icon.astro"
+import { profile } from "@/data/profile"
+---
+
+<div class="rounded-3xl border border-line bg-surface p-8 md:p-12">
+  <p class="max-w-lg text-3xl font-semibold tracking-tight text-balance md:text-4xl">
+    ¿Tienes un proyecto o una oferta en mente?
+  </p>
+  <p class="mt-4 max-w-lg text-muted">
+    Escríbeme y te respondo lo antes posible. También me encontrarás en LinkedIn y GitHub.
+  </p>
+
+  <div class="mt-8 flex flex-wrap items-center gap-3">
+    <a
+      href={`mailto:${profile.email}`}
+      class="inline-flex min-w-0 items-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-medium text-accent-fg transition hover:opacity-90"
+    >
+      <Icon name="mail" class="size-4 shrink-0" />
+      <span class="truncate">{profile.email}</span>
+    </a>
+    <button
+      id="copy-email"
+      type="button"
+      data-email={profile.email}
+      class="inline-flex items-center gap-2 rounded-xl border border-line px-4 py-3 text-sm text-muted transition hover:border-fg/40 hover:text-fg"
+    >
+      <Icon name="copy" />
+      <span>Copiar</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  const button = document.getElementById("copy-email")
+  button?.addEventListener("click", async () => {
+    const label = button.querySelector("span")!
+    try {
+      await navigator.clipboard.writeText(button.dataset.email!)
+      label.textContent = "¡Copiado!"
+    } catch {
+      label.textContent = "No se pudo copiar"
+    }
+    setTimeout(() => (label.textContent = "Copiar"), 2000)
+  })
+</script>

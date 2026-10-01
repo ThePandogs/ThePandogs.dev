@@ -1,56 +1,35 @@
 ---
-import Layout from "@/layouts/Layout.astro"
-
-import AboutMe from "@/components/AboutMe.astro"
-import Briefcase from "@/components/icons/Briefcase.astro"
-import CodeIcon from "@/components/icons/Code.astro"
-import Experience from "@/components/Experience.astro"
-import ProfileCheck from "@/components/icons/ProfileCheck.astro"
-import Projects from "@/components/Projects.astro"
-import SectionContainer from "@/components/SectionContainer.astro"
+import Base from "@/layouts/Base.astro"
+import Nav from "@/components/Nav.astro"
 import Hero from "@/components/Hero.astro"
+import Section from "@/components/Section.astro"
+import Experience from "@/components/Experience.astro"
+import Projects from "@/components/Projects.astro"
+import About from "@/components/About.astro"
+import Contact from "@/components/Contact.astro"
+import Footer from "@/components/Footer.astro"
+import { profile } from "@/data/profile"
 ---
 
-<Layout
-  title="ThePandogs - Especialista en Software"
-  description="Desarrollador. Especializado en crear aplicaciones multiplataforma."
+<Base
+  title={`${profile.name} — ${profile.role}`}
+  description={`${profile.name} (${profile.alias}), ${profile.role.toLowerCase()} en ${profile.location}. .NET, Java, Python y videojuegos.`}
 >
-  <main class="px-4">
-    <SectionContainer class="py-16 md:py-36">
-      <Hero>
-      </slot>
-    </Hero>
-    </SectionContainer>
-    <div class="space-y-24">
-    <SectionContainer id="experiencia">
-      <h2
-        class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white"
-      >
-        <Briefcase class="size-8" />
-        Experiencia laboral relacionada
-      </h2>
+  <Nav />
+  <main class="mx-auto max-w-5xl px-5 sm:px-6">
+    <Hero />
+    <Section id="experiencia" index="01" title="Experiencia">
       <Experience />
-    </SectionContainer>
-
-    <SectionContainer id="proyectos">
-      <h2
-        class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white"
-      >
-        <CodeIcon class="size-7" />
-        Proyectos
-      </h2>
+    </Section>
+    <Section id="proyectos" index="02" title="Proyectos">
       <Projects />
-    </SectionContainer>
-
-    <SectionContainer id="sobre-mi">
-      <h2
-        class="flex items-center mb-6 text-3xl font-semibold gap-x-8 text-black/80 dark:text-white"
-      >
-        <ProfileCheck class="size-8" />
-        Sobre mí
-      </h2>
-      <AboutMe />
-    </SectionContainer>
-  </div>
+    </Section>
+    <Section id="sobre-mi" index="03" title="Sobre mí">
+      <About />
+    </Section>
+    <Section id="contacto" index="04" title="Contacto">
+      <Contact />
+    </Section>
+    <Footer />
   </main>
-</Layout>
+</Base>

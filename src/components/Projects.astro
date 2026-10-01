@@ -1,98 +1,95 @@
 ---
-import GitHub from "./icons/GitHub.astro"
-import Java from "./icons/Java.astro"
-import MySql from "./icons/MySql.astro"
-import Image from "./icons/Image.astro"
-import LinkButton from "./LinkButton.astro"
+import { Image } from "astro:assets"
+import Icon from "./Icon.astro"
+import { projects } from "@/data/profile"
+import { url } from "@/lib/url"
 
-const TAGS = {
-  JAVA: {
-    name: "Java",
-    class: "inline-flex items-center justify-center gap-2 px-4 py-1 text-gray-800 transition bg-gray-100 border border-gray-300 rounded-full dark:bg-gray-800 dark:border-gray-600 dark:text-white focus-visible:ring-yellow-500/80 text-md group max-w-fit focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-white focus-visible:ring-offset-2",
-    icon: Java,
-  },
-  SQL: {
-    name: "MySql",
-    class: "inline-flex items-center justify-center gap-2 px-4 py-1 text-gray-800 transition bg-gray-100 border border-gray-300 rounded-full dark:bg-gray-800 dark:border-gray-600 dark:text-white focus-visible:ring-yellow-500/80 text-md group max-w-fit focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-white focus-visible:ring-offset-2",
-    icon: MySql,
-  },
-  JAVASWING: {
-    name: "Swing",
-    class: "inline-flex items-center justify-center gap-2 px-4 py-1 text-gray-800 transition bg-gray-100 border border-gray-300 rounded-full dark:bg-gray-800 dark:border-gray-600 dark:text-white focus-visible:ring-yellow-500/80 text-md group max-w-fit focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-white focus-visible:ring-offset-2",
-    icon: Java,
-  },
-}
-const PROJECTS = [
-  {
-    title: "AppRestaurante - Gestión",
-    description:
-      "Aplicación para la gestión de mesas de un restaurante con sistema de login de usuarios. Creado con Java, Swing y MySQL.",
-    github: "https://github.com/ThePandogs/APP_RestaurantManagement",
-    link: "/projects/app_restaurant/app_restaurant_preview.gif",
-    image: "/projects/app_restaurant/app_restaurant.webp",
-    previewGif: "/projects/app_restaurant/app_restaurant_preview.gif",
-    tags: [TAGS.JAVA, TAGS.JAVASWING, TAGS.SQL],
-  },
-  {
-    title: "Falling Blocks - Replica Tetris",
-    description:
-      "Esta es una implementación personal y no comercial inspirada en el famoso juego Tetris. Creado con Java y Swing",
-    github: "https://github.com/ThePandogs/Falling-Blocks-Game",
-    link: "/projects/falling_blocks/falling_blocks_preview.gif",
-    image: "/projects/falling_blocks/falling_blocks.webp",
-    previewGif: "/projects/falling_blocks/falling_blocks_preview.gif",
-    tags: [TAGS.JAVA, TAGS.JAVASWING],
-  },
-]
+const featured = projects.filter((p) => p.image)
+const others = projects.filter((p) => !p.image)
 ---
 
-<div class="flex flex-col gap-y-16">
+<div class="grid gap-6 sm:grid-cols-2">
   {
-    PROJECTS.map(({ image, previewGif,title, description,link, tags, github }) => (
-    <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
-      <div class="w-full md:w-1/2">
-        <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
-          <img alt="Imagen proyecto" class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105" loading="lazy" src={image} />
-          <img alt="Preview GIF" class="absolute inset-0 object-cover w-full h-full transition duration-500 opacity-0 group-hover:opacity-100" loading="lazy" src={previewGif} />
-        </div>
-      </div>
-
-      <div class="w-full md:w-1/2 md:max-w-lg">
-        <h3 class="text-2xl text-yellow-400 dark:text-yellow-400">
-          <strong>{title}</strong>
-        </h3>
-        <div class="flex flex-wrap mt-2">
-          <ul class="flex flex-row mb-2 gap-x-2">
-            {tags.map((tag, index) => (
-              <li>
-                <span
-                  class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2`}
-                >
-                  <tag.icon class="size-4" />
-                  {tag.name}
-                </span>
-              </li>
+    featured.map((project) => (
+      <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition hover:border-fg/25">
+        <a
+          href={project.repo}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="relative block aspect-[16/10] overflow-hidden border-b border-line bg-bg"
+          aria-label={`Código de ${project.title} en GitHub`}
+        >
+          {project.image && (
+            <Image
+              src={project.image}
+              alt={`Captura de ${project.title}`}
+              widths={[480, 800]}
+              sizes="(min-width: 640px) 50vw, 100vw"
+              class="size-full object-cover object-top transition duration-500 group-hover:scale-[1.03]"
+            />
+          )}
+          {project.preview && (
+            <img
+              data-preview={url(project.preview)}
+              alt=""
+              aria-hidden="true"
+              class="absolute inset-0 size-full object-cover object-top opacity-0 transition duration-300 group-hover:opacity-100"
+            />
+          )}
+        </a>
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="text-lg font-medium">{project.title}</h3>
+            <Icon
+              name="arrow"
+              class="mt-1 size-4 shrink-0 text-muted transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+            />
+          </div>
+          <p class="mt-2 text-sm leading-relaxed text-muted text-pretty">{project.description}</p>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <li class="rounded-md bg-bg px-2 py-0.5 font-mono text-xs text-muted">{tag}</li>
             ))}
           </ul>
-
-          <div class="mt-2 text-gray-700 dark:text-gray-400">{description}</div>
-          <footer class="flex items-end justify-start mt-4 gap-x-4">
-            {github && (
-              <LinkButton href={github}>
-                <GitHub class="size-6" />
-                Code
-              </LinkButton>
-            )}
-            {link && (
-              <LinkButton href={link}>
-                <Image class="size-4" />
-                Preview
-              </LinkButton>
-            )}
-          </footer>
         </div>
-      </div>
-    </article>
+      </article>
     ))
   }
 </div>
+
+{
+  others.length > 0 && (
+    <ul class="mt-6 divide-y divide-line rounded-2xl border border-line">
+      {others.map((project) => (
+        <li>
+          <a
+            href={project.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex flex-col gap-2 p-5 transition hover:bg-surface sm:flex-row sm:items-center sm:gap-6"
+          >
+            <h3 class="font-medium sm:w-36 sm:shrink-0">{project.title}</h3>
+            <p class="flex-1 text-sm leading-relaxed text-muted">{project.description}</p>
+            <span class="flex items-center gap-3 font-mono text-xs text-muted">
+              {project.tags.join(" · ")}
+              <Icon name="arrow" class="size-4 transition group-hover:text-accent" />
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+<script>
+  // Los GIF pesan varios MB: solo se descargan la primera vez que se pasa el ratón.
+  document.querySelectorAll<HTMLImageElement>("img[data-preview]").forEach((img) => {
+    img.closest("article")?.addEventListener(
+      "pointerenter",
+      () => {
+        img.src = img.dataset.preview!
+      },
+      { once: true },
+    )
+  })
+</script>
