@@ -76,23 +76,40 @@ const others = projects.filter((p) => !p.image)
 {
   others.length > 0 && (
     <ul class="mt-6 divide-y divide-line rounded-2xl border border-line">
-      {others.map((project) => (
-        <li>
-          <a
-            href={project.site ?? project.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group flex flex-col gap-2 p-5 transition hover:bg-surface sm:flex-row sm:items-center sm:gap-6"
-          >
-            <h3 class="font-medium sm:w-36 sm:shrink-0">{project.title}</h3>
-            <p class="flex-1 text-sm leading-relaxed text-muted">{project.description[lang]}</p>
-            <span class="flex items-center gap-3 font-mono text-xs text-muted">
-              {project.tags.join(" · ")}
-              <Icon name="arrow" class="size-4 transition group-hover:text-accent" />
-            </span>
-          </a>
-        </li>
-      ))}
+      {others.map((project) => {
+        const href = project.private ? undefined : (project.site ?? project.repo)
+        const Tag = href ? "a" : "div"
+        return (
+          <li>
+            <Tag
+              href={href}
+              target={href && "_blank"}
+              rel={href && "noopener noreferrer"}
+              class:list={["group block p-5 transition", href && "hover:bg-surface"]}
+            >
+              <div class="flex flex-wrap items-center gap-2">
+                <h3 class="font-medium">{project.title}</h3>
+                {project.status && (
+                  <span class="rounded-md bg-accent/15 px-2 py-0.5 font-mono text-[0.7rem] text-accent">
+                    {project.status[lang]}
+                  </span>
+                )}
+                {project.private && (
+                  <span class="flex items-center gap-1 font-mono text-[0.7rem] text-muted">
+                    <Icon name="lock" class="size-3" />
+                    {t("projects.private")}
+                  </span>
+                )}
+                {href && (
+                  <Icon name="arrow" class="ml-auto size-4 text-muted transition group-hover:text-accent" />
+                )}
+              </div>
+              <p class="mt-2 text-sm leading-relaxed text-muted text-pretty">{project.description[lang]}</p>
+              <p class="mt-3 font-mono text-xs text-muted">{project.tags.join(" · ")}</p>
+            </Tag>
+          </li>
+        )
+      })}
     </ul>
   )
 }

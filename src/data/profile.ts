@@ -153,6 +153,10 @@ export type Project = {
   site?: string
   /** Ocupa el ancho completo en la rejilla de proyectos. */
   wide?: boolean
+  /** Código privado: se muestra sin enlace al repositorio. */
+  private?: boolean
+  /** Estado, p. ej. "En desarrollo". */
+  status?: L
   image?: ImageMetadata
   preview?: string
 }
@@ -283,6 +287,43 @@ export const projects: Project[] = [
     tags: ["Java", "Swing"],
     image: fallingBlocks,
     preview: "projects/falling-blocks.gif",
+  },
+  {
+    title: "AgentOS",
+    description: {
+      es: "Núcleo de orquestación multi-agente sobre LangGraph: agentes que usan herramientas en sandbox, piden aprobación humana antes de acciones peligrosas y sobreviven a reinicios con el estado en PostgreSQL. RAG, enrutado a especialistas, cinco proveedores de modelos, coste exacto por ejecución y panel en React con streaming. Más de 1.800 tests y un 96 % de cobertura.",
+      en: "A multi-agent orchestration core on LangGraph: agents use sandboxed tools, ask for human approval before risky actions and survive restarts with state in PostgreSQL. RAG, routing to specialists, five model providers, exact per-run cost tracking and a streaming React dashboard. Over 1,800 tests and 96% coverage.",
+    },
+    tags: ["Python", "LangGraph", "PostgreSQL", "React", "Docker"],
+    private: true,
+  },
+  {
+    title: "PandUI",
+    description: {
+      es: "Framework de UI para Unity en veinte paquetes UPM independientes: ventanas, binding reactivo, temas con tokens, navegación, localización y más, con dos backends intercambiables (uGUI y UI Toolkit) sobre la misma lógica.",
+      en: "A UI framework for Unity split into twenty independent UPM packages: windows, reactive binding, token-based theming, navigation, localisation and more, with two interchangeable backends (uGUI and UI Toolkit) over the same logic.",
+    },
+    tags: ["Unity", "C#", "UI Toolkit", "UPM"],
+    private: true,
+  },
+  {
+    title: "Imperat",
+    description: {
+      es: "Juego de gestión de una compañía de mercenarios en Unity 6, con la lógica del gremio y la simulación de combate separadas del motor y unos 1.700 tests. Su interfaz está construida sobre PandUI.",
+      en: "A management game about running a mercenary company, in Unity 6, with guild logic and combat simulation kept independent from the engine and around 1,700 tests. Its interface is built on PandUI.",
+    },
+    tags: ["Unity 6", "C#", "Game design"],
+    private: true,
+    status: { es: "En desarrollo", en: "In development" },
+  },
+  {
+    title: "B.A.M.B.O.",
+    description: {
+      es: "NAS doméstico para la familia: Proxmox, TrueNAS SCALE con ZFS en espejo y Nextcloud, con panel de control propio, organización automática de la biblioteca de fotos por EXIF, detección de duplicados y copias de seguridad con cuarentena.",
+      en: "A home NAS for the family: Proxmox, TrueNAS SCALE with mirrored ZFS and Nextcloud, plus a custom dashboard, automatic photo library organisation by EXIF, duplicate detection and backups with quarantine.",
+    },
+    tags: ["Proxmox", "ZFS", "Python", "Homelab"],
+    private: true,
   },
   {
     title: "CopyBamboo",
