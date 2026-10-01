@@ -1,16 +1,23 @@
 ---
 import { about, stack } from "@/data/profile"
+import type { Lang } from "@/i18n"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
 ---
 
 <div class="space-y-5 text-lg leading-relaxed text-muted text-pretty">
-  {about.map((paragraph) => <p>{paragraph}</p>)}
+  {about.map((paragraph) => <p>{paragraph[lang]}</p>)}
 </div>
 
 <dl class="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
   {
     stack.map(({ group, items }) => (
       <div class="bg-bg p-5">
-        <dt class="font-mono text-xs uppercase tracking-wider text-accent">{group}</dt>
+        <dt class="font-mono text-xs uppercase tracking-wider text-accent">{group[lang]}</dt>
         <dd class="mt-2 text-sm">{items.join(" · ")}</dd>
       </div>
     ))

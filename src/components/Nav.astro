@@ -1,28 +1,36 @@
 ---
 import Icon from "./Icon.astro"
 import { profile } from "@/data/profile"
-import { url } from "@/lib/url"
+import { type Lang, homePath, useTranslations } from "@/i18n"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+const otherLang: Lang = lang === "es" ? "en" : "es"
 
 const items = [
-  { href: "#experiencia", label: "Experiencia" },
-  { href: "#clientes", label: "Clientes" },
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#sobre-mi", label: "Sobre mí" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "#experiencia", label: t("nav.experience") },
+  { href: "#webs", label: t("nav.clients") },
+  { href: "#proyectos", label: t("nav.projects") },
+  { href: "#sobre-mi", label: t("nav.about") },
+  { href: "#contacto", label: t("nav.contact") },
 ]
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 px-4 pt-4">
   <nav
     class="mx-auto flex max-w-5xl items-center justify-between rounded-2xl border border-line/80 bg-bg/70 px-4 py-2.5 backdrop-blur-xl"
-    aria-label="Principal"
+    aria-label={t("nav.label")}
   >
-    <a href={url()} class="font-mono text-sm font-medium tracking-tight">
+    <a href={homePath(lang)} class="font-mono text-sm font-medium tracking-tight">
       {profile.alias.toLowerCase()}<span class="text-accent">.dev</span>
     </a>
 
     <div class="flex items-center gap-1">
-      <ul class="hidden items-center gap-1 sm:flex">
+      <ul class="hidden items-center gap-1 md:flex">
         {
           items.map((item) => (
             <li>
@@ -37,11 +45,21 @@ const items = [
           ))
         }
       </ul>
+      <a
+        href={homePath(otherLang)}
+        hreflang={otherLang}
+        lang={otherLang}
+        class="ml-1 grid h-9 place-items-center rounded-lg px-2.5 font-mono text-xs uppercase text-muted transition hover:bg-surface hover:text-fg"
+        aria-label={t("nav.language")}
+        title={t("nav.language")}
+      >
+        {otherLang}
+      </a>
       <button
         id="theme-toggle"
         type="button"
-        class="ml-1 grid size-9 place-items-center rounded-lg text-muted transition hover:bg-surface hover:text-fg"
-        aria-label="Cambiar tema"
+        class="grid size-9 place-items-center rounded-lg text-muted transition hover:bg-surface hover:text-fg"
+        aria-label={t("nav.theme")}
       >
         <Icon name="sun" class="hidden size-4 dark:block" />
         <Icon name="moon" class="size-4 dark:hidden" />
