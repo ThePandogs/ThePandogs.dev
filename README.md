@@ -1,27 +1,33 @@
-# 👨🏻‍💻 Porfolio para programadores y desarrolladores
+# thepandogs.dev
 
-<div align="center">
-<a href="https://porfolio.dev/">
-<img src="./public/porfolio.webp">
-</a>
-<p></p>
-</div>
+Portfolio personal de **Carlos Fraile (ThePandogs)** — desarrollador de software en Vigo.
 
-<div align="center">
+🔗 https://thepandogs.github.io/ThePandogs.dev/
 
-![Astro Badge](https://img.shields.io/badge/Astro-FF3E00?logo=astro&logoColor=fff&style=flat)
-![Tailwind CSS Badge](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=flat)
-![GitHub stars](https://img.shields.io/github/stars/midudev/porfolio.dev)
-![GitHub PRs](https://img.shields.io/github/issues-pr/midudev/porfolio.dev)
-![GitHub forks](https://img.shields.io/github/forks/midudev/porfolio.dev)
-![GitHub issues](https://img.shields.io/github/issues/midudev/porfolio.dev)
+## Stack
 
-</div>
+- [Astro 7](https://astro.build) — sitio estático, sin JavaScript de framework en cliente
+- [Tailwind CSS 4](https://tailwindcss.com) vía `@tailwindcss/vite`
+- Tipografías Geist y Geist Mono
+- Imágenes optimizadas con `astro:assets` (WebP, varios tamaños)
+- Despliegue automático en GitHub Pages con GitHub Actions
 
-## 🫂 Contribuidores
+## Desarrollo
 
-<a href="https://github.com/midudev/porfolio.dev/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=midudev/porfolio.dev" />
-</a>
+Requiere Node.js 22.12+ y pnpm.
 
-<p></p>
+```bash
+pnpm install
+pnpm dev       # http://localhost:4321/ThePandogs.dev/
+pnpm build     # astro check + build en dist/
+pnpm preview
+```
+
+## Editar contenido
+
+Todo el texto (perfil, experiencia, proyectos y stack) vive en [`src/data/profile.ts`](src/data/profile.ts).
+Las capturas de proyectos van en `src/assets/projects/` y los GIF de previsualización en `public/projects/`.
+
+## Licencia
+
+El código está bajo licencia [MIT](LICENSE). Los textos, la fotografía y las capturas son © Carlos Fraile y no están incluidos en esa licencia.

@@ -1,0 +1,17 @@
+---
+import Base from "@/layouts/Base.astro"
+import { url } from "@/lib/url"
+---
+
+<Base title="Página no encontrada" description="Esta página no existe.">
+  <main class="grid min-h-dvh place-items-center px-6 text-center">
+    <div>
+      <p class="font-mono text-sm text-accent">404</p>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight">Aquí no hay nada</h1>
+      <p class="mt-3 text-muted">La página que buscas no existe o se ha movido.</p>
+      <a href={url()} class="mt-8 inline-block rounded-xl bg-fg px-5 py-3 text-sm font-medium text-bg">
+        Volver al inicio
+      </a>
+    </div>
+  </main>
+</Base>

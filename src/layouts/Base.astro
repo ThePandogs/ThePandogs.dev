@@ -1,0 +1,49 @@
+---
+import "@/styles/global.css"
+import { url } from "@/lib/url"
+
+interface Props {
+  title: string
+  description: string
+}
+
+const { title, description } = Astro.props
+const canonical = new URL(Astro.url.pathname, Astro.site)
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={url("favicon.svg")} />
+    <link rel="sitemap" href={url("sitemap-index.xml")} />
+    <meta name="theme-color" content="#0b0d0c" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="es_ES" />
+    <meta name="generator" content={Astro.generator} />
+
+    <script is:inline>
+      // Aplica el tema antes de pintar para evitar el parpadeo.
+      ;(() => {
+        let stored = null
+        try {
+          stored = localStorage.getItem("theme")
+        } catch {}
+        const dark = stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches
+        document.documentElement.classList.toggle("dark", dark)
+      })()
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
