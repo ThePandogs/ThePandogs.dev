@@ -10,7 +10,7 @@ export const profile = {
   alias: "ThePandogs",
   role: "Desarrollador de software",
   tagline:
-    "Desarrollo webs a medida, aplicaciones de escritorio y videojuegos. Trabajo con TypeScript, React, .NET y Java, y me importa que el software sea claro de usar y fácil de mantener.",
+    "Desarrollador .NET en el día a día, construyendo ERPs e integraciones, y full-stack para mis propios clientes. También hago videojuegos. Me importa que el software sea claro de usar y fácil de mantener.",
   location: "Vigo, España",
   available: true,
   email: "carlosfraileduran@gmail.com",
@@ -21,9 +21,9 @@ export const profile = {
 }
 
 export const about = [
-  "Soy Carlos, aunque casi todo el mundo me llama Pandogs. La tecnología me ha fascinado desde pequeño, y en 2022 decidí convertir esa curiosidad en mi profesión.",
+  "Soy Carlos, aunque casi todo el mundo me llama Pandogs. Empecé en la informática por el lado del hardware y los sistemas: técnico, soporte y administración de sistemas, en España, Polonia y Malta. En 2022 decidí convertir mi curiosidad por la programación en mi profesión y me formé en Desarrollo de Aplicaciones Multiplataforma.",
   "Además desarrollo webs para clientes de principio a fin: diseño, frontend, API, base de datos y despliegue. Hoy tengo dos en producción, una agencia del Camino de Santiago y un club de fútbol de Vigo.",
-  "Hoy trabajo con .NET en software de gestión empresarial y, en paralelo, cofundé un estudio indie de videojuegos donde programo y coordino al equipo. Disfruto especialmente de la parte de diseño: modelar bien el dominio, separar responsabilidades y construir interfaces que no estorben.",
+  "Hoy desarrollo ERPs en .NET y lidero proyectos para clientes, y en paralelo dirijo un estudio indie de videojuegos. Disfruto especialmente de la parte de diseño: modelar bien el dominio, separar responsabilidades y construir interfaces que no estorben.",
 ]
 
 export type Experience = {
@@ -37,22 +37,43 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    period: "Actualidad",
-    role: "Programador .NET",
-    company: "Esquío Ingeniería",
+    period: "Jul 2025 — Actualidad",
+    role: "Desarrollador de software",
+    company: "Inforhouse",
     description:
-      "Desarrollo de Nimo ERP con Visual Basic y C#, con interfaces en Windows Forms y WPF, además de la gestión y administración de bases de datos SQL Server.",
-    tags: ["C#", "VB.NET", "WPF", "WinForms", "SQL Server"],
+      "Evolución de Aiko ERP y liderazgo técnico en proyectos y verticalizaciones para clientes: análisis, diseño, reuniones de requisitos y validación de entregables. Servicios web SOAP en .NET con capa proxy a JSON para integrar sistemas externos, soporte del ERP GSBase, SQL Server e informes con Crystal Reports.",
+    tags: ["VB.NET", "C#", "SOAP", "SQL Server", "Crystal Reports"],
   },
   {
-    period: "Actualidad",
-    role: "Cofundador · Programador y Project Manager",
-    company: "ThePandogsGames",
+    period: "Abr 2024 — Jul 2025",
+    role: "Desarrollador .NET",
+    company: "Esquío Ingeniería",
+    description:
+      "Lideré la evolución de Nimo ERP: interfaz modernizada y mejor rendimiento con paginación. Remesas SEPA, Verifactu y un sistema de gestión logística completo, de la recepción a la expedición, con EDI (DESADV, DELJIT), inventario, etiquetas y un módulo de lectura para almacén.",
+    tags: ["VB.NET", "C#", "WinForms", "WPF", "SQL Server", "EDI"],
+  },
+  {
+    period: "Ene 2023 — Actualidad",
+    role: "Cofundador · Programador y diseñador UI/UX",
+    company: "The Pandogs Games",
     url: "https://www.thepandogsgames.com",
     description:
-      "Estudio indie de videojuegos. Programo y gestiono un equipo de 8 personas: planificación, reparto de tareas y seguimiento del desarrollo.",
-    tags: ["Game dev", "Gestión de equipos"],
+      "Estudio indie de videojuegos. Programo, diseño la experiencia de usuario y coordino un equipo de siete desarrolladores con el que hemos recibido varios premios.",
+    tags: ["Game dev", "UI/UX", "Gestión de equipos"],
   },
+]
+
+/** Etapa anterior como técnico de sistemas y soporte, en formato compacto. */
+export const earlierExperience: { period: string; role: string; company: string }[] = [
+  { period: "2019 — 2022", role: "Técnico de impresión", company: "Grupo Solitium" },
+  { period: "2018 — 2019", role: "Soporte técnico Help Desk", company: "Bosch Service Solutions" },
+  { period: "2016 — 2017", role: "Administrador de sistemas", company: "Colegio n.º 28 · Breslavia, Polonia" },
+  { period: "2016", role: "Técnico electrónico", company: "Cutajar Limited · Malta" },
+]
+
+export const education: { period: string; title: string; center: string }[] = [
+  { period: "2022 — 2024", title: "CFGS Desarrollo de Aplicaciones Multiplataforma", center: "IES Teis" },
+  { period: "2014 — 2016", title: "CFGM Sistemas Microinformáticos y Redes", center: "IES Teis" },
 ]
 
 export type Project = {
@@ -80,7 +101,7 @@ export const clientProjects: ClientProject[] = [
     client: "Camino Galicia",
     description:
       "Plataforma white-label para agencias que venden rutas a pie del Camino de Santiago. La primera instancia en producción es Camino Galicia: catálogo de caminos, reservas y panel de administración para gestionar todo el contenido.",
-    site: "https://www.caminogaliciapt.com",
+    site: "https://www.caminogaliciapt.com/es",
     image: caminoGalicia,
     tags: ["Next.js", "TypeScript", "Express", "PostgreSQL", "Vercel"],
     highlights: [
@@ -143,7 +164,7 @@ export const projects: Project[] = [
 export const stack: { group: string; items: string[] }[] = [
   { group: "Web", items: ["TypeScript", "React", "Next.js", "Astro", "Tailwind CSS"] },
   { group: "Backend", items: ["Node.js", "Express", "REST", "JWT"] },
-  { group: ".NET", items: ["C#", "VB.NET", "WPF", "Windows Forms"] },
+  { group: ".NET", items: ["C#", "VB.NET", "WPF", "Windows Forms", "SOAP", "LINQ", "Crystal Reports"] },
   { group: "Datos", items: ["PostgreSQL", "SQL Server", "MySQL"] },
   { group: "Java y Python", items: ["Java", "Swing", "Maven", "Python"] },
   { group: "Herramientas", items: ["Git", "GitHub Actions", "Vercel"] },
