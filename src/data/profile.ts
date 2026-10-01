@@ -57,10 +57,10 @@ export const experience: Experience[] = [
     role: { es: "Desarrollador de software", en: "Software developer" },
     company: "Inforhouse",
     description: {
-      es: "Evolución de Aiko ERP y liderazgo técnico en proyectos y verticalizaciones para clientes: análisis, diseño, reuniones de requisitos y validación de entregables. Servicios web SOAP en .NET con capa proxy a JSON para integrar sistemas externos, soporte del ERP GSBase, SQL Server e informes con Crystal Reports.",
-      en: "Evolving Aiko ERP and technical lead on client projects and vertical solutions: analysis, design, requirements meetings and sign-off of deliverables. .NET SOAP web services with a JSON proxy layer to integrate external systems, GSBase ERP support, SQL Server and Crystal Reports.",
+      es: "Evolución de Aiko ERP y liderazgo técnico en proyectos y verticalizaciones para clientes: análisis, diseño, reuniones de requisitos y validación de entregables. Servicios web SOAP en .NET con capa proxy a JSON para integrar sistemas externos, desarrollo y soporte del ERP GSBase en Python, SQL Server e informes con Crystal Reports.",
+      en: "Evolving Aiko ERP and technical lead on client projects and vertical solutions: analysis, design, requirements meetings and sign-off of deliverables. .NET SOAP web services with a JSON proxy layer to integrate external systems, development and support of the Python-based GSBase ERP, SQL Server and Crystal Reports.",
     },
-    tags: ["VB.NET", "C#", "SOAP", "SQL Server", "Crystal Reports"],
+    tags: ["VB.NET", "C#", "Python", "SOAP", "SQL Server", "Crystal Reports"],
   },
   {
     period: { es: "Sep 2024 — Actualidad", en: "Sep 2024 — Present" },
