@@ -11,20 +11,28 @@ const others = projects.filter((p) => !p.image)
 <div class="grid gap-6 sm:grid-cols-2">
   {
     featured.map((project) => (
-      <article class="group overflow-hidden rounded-2xl border border-line bg-surface transition hover:border-fg/25">
+      <article
+        class:list={[
+          "group overflow-hidden rounded-2xl border border-line bg-surface transition hover:border-fg/25",
+          project.wide && "sm:col-span-2",
+        ]}
+      >
         <a
-          href={project.repo}
+          href={project.site ?? project.repo}
           target="_blank"
           rel="noopener noreferrer"
-          class="relative block aspect-[16/10] overflow-hidden border-b border-line bg-bg"
-          aria-label={`Código de ${project.title} en GitHub`}
+          class:list={[
+            "relative block overflow-hidden border-b border-line bg-bg",
+            project.wide ? "aspect-[16/10] sm:aspect-[21/9]" : "aspect-[16/10]",
+          ]}
+          aria-label={project.site ? `Abrir ${project.title}` : `Código de ${project.title} en GitHub`}
         >
           {project.image && (
             <Image
               src={project.image}
               alt={`Captura de ${project.title}`}
-              widths={[480, 800]}
-              sizes="(min-width: 640px) 50vw, 100vw"
+              widths={project.wide ? [640, 1024, 1440] : [480, 800]}
+              sizes={project.wide ? "(min-width: 1024px) 760px, 100vw" : "(min-width: 640px) 50vw, 100vw"}
               class="size-full object-cover object-top transition duration-500 group-hover:scale-[1.03]"
             />
           )}
