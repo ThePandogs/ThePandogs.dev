@@ -2,7 +2,6 @@
 import { Image } from "astro:assets"
 import Icon from "./Icon.astro"
 import { projects } from "@/data/profile"
-import { url } from "@/lib/url"
 import { type Lang, useTranslations } from "@/i18n"
 
 interface Props {
@@ -42,14 +41,6 @@ const others = projects.filter((p) => !p.image)
               widths={project.wide ? [640, 1024, 1440] : [480, 800]}
               sizes={project.wide ? "(min-width: 1024px) 760px, 100vw" : "(min-width: 640px) 50vw, 100vw"}
               class="size-full object-cover object-top transition duration-500 group-hover:scale-[1.03]"
-            />
-          )}
-          {project.preview && (
-            <img
-              data-preview={url(project.preview)}
-              alt=""
-              aria-hidden="true"
-              class="absolute inset-0 size-full object-cover object-top opacity-0 transition duration-300 group-hover:opacity-100"
             />
           )}
         </a>
@@ -114,15 +105,3 @@ const others = projects.filter((p) => !p.image)
   )
 }
 
-<script>
-  // Los GIF pesan varios MB: solo se descargan la primera vez que se pasa el ratón.
-  document.querySelectorAll<HTMLImageElement>("img[data-preview]").forEach((img) => {
-    img.closest("article")?.addEventListener(
-      "pointerenter",
-      () => {
-        img.src = img.dataset.preview!
-      },
-      { once: true },
-    )
-  })
-</script>
