@@ -4,6 +4,7 @@ import appRestaurant from "@/assets/projects/app-restaurant.png"
 import fallingBlocks from "@/assets/projects/falling-blocks.png"
 import caminoGalicia from "@/assets/projects/camino-galicia.png"
 import arenasDeAlcabre from "@/assets/projects/arenas-de-alcabre.png"
+import pandogsGames from "@/assets/projects/pandogs-games.png"
 
 export const profile = {
   name: "Carlos Fraile",
@@ -54,12 +55,12 @@ export const experience: Experience[] = [
   },
   {
     period: "Ene 2023 — Actualidad",
-    role: "Cofundador · Programador y diseñador UI/UX",
+    role: "Cofundador y CEO · Desarrollo, game design y gestión del equipo",
     company: "The Pandogs Games",
-    url: "https://www.thepandogsgames.com",
+    url: "https://thepandogsgames.com",
     description:
-      "Estudio indie de videojuegos. Programo, diseño la experiencia de usuario y coordino un equipo de siete desarrolladores con el que hemos recibido varios premios.",
-    tags: ["Game dev", "UI/UX", "Gestión de equipos"],
+      "Estudio indie de Vigo que montamos entre tres compañeros. Llevo la parte de dirección y coordino a un equipo de siete personas entre programación, arte, música y diseño. Además programo, diseño mecánicas y me encargo de la UI/UX. Hemos publicado cinco juegos gratuitos y recibido varios premios.",
+    tags: ["Unity", "C#", "Game design", "UI/UX", "Gestión de equipos"],
   },
 ]
 
@@ -84,6 +85,8 @@ export type Project = {
   repo?: string
   /** Web en producción. */
   site?: string
+  /** Ocupa el ancho completo en la rejilla de proyectos. */
+  wide?: boolean
   image?: ImageMetadata
   preview?: string
 }
@@ -127,6 +130,15 @@ export const clientProjects: ClientProject[] = [
 ]
 
 export const projects: Project[] = [
+  {
+    title: "The Pandogs Games",
+    description:
+      "Nuestro estudio indie: Polaris, Hop-Hop! Pandog!, KnightMadness, Planet Defenders y Mad Bird, todos jugables gratis. Hecho en equipo entre programación, arte, música y diseño.",
+    site: "https://thepandogsgames.com",
+    tags: ["Unity", "C#", "Game design", "Pixel art"],
+    image: pandogsGames,
+    wide: true,
+  },
   {
     title: "AppRestaurante",
     description:
