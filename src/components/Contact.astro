@@ -1,14 +1,22 @@
 ---
 import Icon from "./Icon.astro"
 import { profile } from "@/data/profile"
+import { type Lang, useTranslations } from "@/i18n"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
 ---
 
 <div class="rounded-3xl border border-line bg-surface p-8 md:p-12">
   <p class="max-w-lg text-3xl font-semibold tracking-tight text-balance md:text-4xl">
-    ¿Tienes un proyecto o una oferta en mente?
+    {t("contact.title")}
   </p>
   <p class="mt-4 max-w-lg text-muted">
-    Escríbeme y te respondo lo antes posible. También me encontrarás en LinkedIn y GitHub.
+    {t("contact.body")}
   </p>
 
   <div class="mt-8 flex flex-wrap items-center gap-3">
@@ -23,10 +31,13 @@ import { profile } from "@/data/profile"
       id="copy-email"
       type="button"
       data-email={profile.email}
+      data-copy={t("contact.copy")}
+      data-copied={t("contact.copied")}
+      data-error={t("contact.copyError")}
       class="inline-flex items-center gap-2 rounded-xl border border-line px-4 py-3 text-sm text-muted transition hover:border-fg/40 hover:text-fg"
     >
       <Icon name="copy" />
-      <span>Copiar</span>
+      <span>{t("contact.copy")}</span>
     </button>
   </div>
 </div>
@@ -37,10 +48,10 @@ import { profile } from "@/data/profile"
     const label = button.querySelector("span")!
     try {
       await navigator.clipboard.writeText(button.dataset.email!)
-      label.textContent = "¡Copiado!"
+      label.textContent = button.dataset.copied!
     } catch {
-      label.textContent = "No se pudo copiar"
+      label.textContent = button.dataset.error!
     }
-    setTimeout(() => (label.textContent = "Copiar"), 2000)
+    setTimeout(() => (label.textContent = button.dataset.copy!), 2000)
   })
 </script>

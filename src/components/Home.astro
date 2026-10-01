@@ -1,0 +1,53 @@
+---
+import Base from "@/layouts/Base.astro"
+import Nav from "./Nav.astro"
+import Hero from "./Hero.astro"
+import Section from "./Section.astro"
+import Experience from "./Experience.astro"
+import ClientWork from "./ClientWork.astro"
+import Projects from "./Projects.astro"
+import About from "./About.astro"
+import Contact from "./Contact.astro"
+import Footer from "./Footer.astro"
+import { profile } from "@/data/profile"
+import { type Lang, useTranslations } from "@/i18n"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+---
+
+<Base
+  lang={lang}
+  title={`${profile.name} — ${profile.role[lang]}`}
+  description={t("meta.description", {
+    name: profile.name,
+    alias: profile.alias,
+    role: profile.role[lang].toLowerCase(),
+    location: profile.location[lang],
+  })}
+>
+  <Nav lang={lang} />
+  <main class="mx-auto max-w-5xl px-5 sm:px-6">
+    <Hero lang={lang} />
+    <Section id="experiencia" index="01" title={t("section.experience")}>
+      <Experience lang={lang} />
+    </Section>
+    <Section id="webs" index="02" title={t("section.clients")}>
+      <ClientWork lang={lang} />
+    </Section>
+    <Section id="proyectos" index="03" title={t("section.projects")}>
+      <Projects lang={lang} />
+    </Section>
+    <Section id="sobre-mi" index="04" title={t("section.about")}>
+      <About lang={lang} />
+    </Section>
+    <Section id="contacto" index="05" title={t("section.contact")}>
+      <Contact lang={lang} />
+    </Section>
+    <Footer />
+  </main>
+</Base>
