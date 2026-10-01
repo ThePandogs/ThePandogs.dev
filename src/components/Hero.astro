@@ -1,45 +1,90 @@
 ---
-const personalImageAlt = "Carlos Fraile"
-import Badge from "@/components/Badge.astro"
-import LinkedInIcon from "@/components/icons/LinkedIn.astro"
-import MailIcon from "@/components/icons/Mail.astro"
-import SocialPill from "@/components/SocialPill.astro"
+import { Image } from "astro:assets"
+import Icon from "./Icon.astro"
+import photo from "@/assets/profile.png"
+import { profile } from "@/data/profile"
+import { type Lang, useTranslations } from "@/i18n"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
 ---
 
-<div class="max-w-xl">
-  <div class="flex gap-4 mb-4">
-    <img
-      class="rounded-full shadow-lg size-16"
-      src="/thepandogsdev.webp"
-      alt={personalImageAlt}
-    />
-    <a
-      href="https://linkedin.com/in/carlosfrailedev"
-      target="_blank"
-      rel="noopener"
-      class="flex items-center transition md:justify-center md:hover:scale-105"
-    >
-      <Badge>Disponible para trabajar</Badge>
-    </a>
-  </div>
-  <h1
-    class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white"
+<section class="relative pb-20 pt-36 md:pb-28 md:pt-48">
+  <div
+    class="pointer-events-none absolute -top-32 left-1/2 -z-10 h-[32rem] w-[48rem] -translate-x-1/2 rounded-full bg-accent/15 blur-3xl dark:bg-accent/10"
+    aria-hidden="true"
   >
-    Hey, soy Carlos
-  </h1>
-  <p class="mt-6 text-xl text-gray-800 dark:[&>strong]:text-yellow-200 [&>strong]:text-yellow-500 [&>strong]:font-semibold dark:text-gray-300">
-   <strong>Desarrollador de aplicaciones multiplataforma</strong>  
-  </p>
-  <p>Especializado en programación orientada a objetos y diseño de interfaces.</p>
-  <p>Vigo, España 🇪🇸. </p>
-  <nav class="flex flex-wrap gap-4 mt-8">
-    <SocialPill href="mailto:carlosfraileduran@gmail.com">
-      <MailIcon class="size-4" />
-      Contáctame
-    </SocialPill>
-    <SocialPill href="https://linkedin.com/in/carlosfrailedev">
-      <LinkedInIcon class="size-4" />
-      LinkedIn
-    </SocialPill>
-  </nav>
-</div>
+  </div>
+
+  <div class="flex flex-col-reverse gap-10 md:flex-row md:items-end md:justify-between">
+    <div class="max-w-2xl">
+      {
+        profile.available && (
+          <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1 text-xs text-muted">
+            <span class="relative flex size-2">
+              <span class="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
+              <span class="relative inline-flex size-2 rounded-full bg-accent" />
+            </span>
+            {t("hero.available")}
+          </p>
+        )
+      }
+
+      <h1 class="text-5xl font-semibold leading-[1.05] tracking-tighter text-balance sm:text-6xl md:text-7xl">
+        {t("hero.greeting")}<br />
+        <span class="text-muted">{profile.role[lang]}.</span>
+      </h1>
+
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted text-pretty">
+        {profile.tagline[lang]}
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a
+          href="#contacto"
+          class="inline-flex items-center gap-2 rounded-xl bg-fg px-5 py-3 text-sm font-medium text-bg transition hover:opacity-90"
+        >
+          {t("hero.cta")}
+          <Icon name="arrow" class="size-4" />
+        </a>
+        <a
+          href={profile.links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-xl border border-line px-4 py-3 text-sm transition hover:border-fg/40"
+        >
+          <Icon name="github" /> GitHub
+        </a>
+        <a
+          href={profile.links.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-xl border border-line px-4 py-3 text-sm transition hover:border-fg/40"
+        >
+          <Icon name="linkedin" /> LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <figure class="shrink-0">
+      <Image
+        src={photo}
+        alt={t("hero.photoAlt", { name: profile.name })}
+        width={176}
+        height={176}
+        densities={[1, 2]}
+        loading="eager"
+        fetchpriority="high"
+        class="size-28 rounded-3xl object-cover ring-1 ring-line md:size-44"
+      />
+      <figcaption class="mt-3 flex items-center gap-1.5 font-mono text-xs text-muted">
+        <Icon name="pin" class="size-3.5" />
+        {profile.location[lang]}
+      </figcaption>
+    </figure>
+  </div>
+</section>

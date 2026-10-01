@@ -1,0 +1,57 @@
+---
+import Icon from "./Icon.astro"
+import { profile } from "@/data/profile"
+import { type Lang, useTranslations } from "@/i18n"
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+---
+
+<div class="rounded-3xl border border-line bg-surface p-8 md:p-12">
+  <p class="max-w-lg text-3xl font-semibold tracking-tight text-balance md:text-4xl">
+    {t("contact.title")}
+  </p>
+  <p class="mt-4 max-w-lg text-muted">
+    {t("contact.body")}
+  </p>
+
+  <div class="mt-8 flex flex-wrap items-center gap-3">
+    <a
+      href={`mailto:${profile.email}`}
+      class="inline-flex min-w-0 items-center gap-2 rounded-xl bg-accent px-5 py-3 text-sm font-medium text-accent-fg transition hover:opacity-90"
+    >
+      <Icon name="mail" class="size-4 shrink-0" />
+      <span class="truncate">{profile.email}</span>
+    </a>
+    <button
+      id="copy-email"
+      type="button"
+      data-email={profile.email}
+      data-copy={t("contact.copy")}
+      data-copied={t("contact.copied")}
+      data-error={t("contact.copyError")}
+      class="inline-flex items-center gap-2 rounded-xl border border-line px-4 py-3 text-sm text-muted transition hover:border-fg/40 hover:text-fg"
+    >
+      <Icon name="copy" />
+      <span>{t("contact.copy")}</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  const button = document.getElementById("copy-email")
+  button?.addEventListener("click", async () => {
+    const label = button.querySelector("span")!
+    try {
+      await navigator.clipboard.writeText(button.dataset.email!)
+      label.textContent = button.dataset.copied!
+    } catch {
+      label.textContent = button.dataset.error!
+    }
+    setTimeout(() => (label.textContent = button.dataset.copy!), 2000)
+  })
+</script>

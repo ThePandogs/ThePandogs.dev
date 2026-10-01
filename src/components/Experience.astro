@@ -1,32 +1,82 @@
 ---
-import ExperienceItem from "./ExperienceItem.astro"
-const EXPERIENCIE = [
-    {
-    date: "Actualmente...",
-    title: "Programador      Project Manager",
-    company: "ThePandogsGames",
-    description:
-      "Fundador de estudio indie de videojuegos. Mis roles actuales son programador y Project Manager de un equipo de 8 personas.",
-    link: "https://www.ThePandogsGames.com",
-  },
-  
-  {
-    date: "Actualmente...",
-    title: "Programador .NET",
-    company: "Esquío Ingeniería",
-    description:
-      "Programador en Visual Basic y C#. Desarrollando Nimo ERP con .NET utilizando Windows Forms y Windows Presentation Foundation (WPF) además de la gestión y administración de bases de datos SQL Server.",
-  },
+import Icon from "./Icon.astro"
+import { earlierExperience, education, experience } from "@/data/profile"
+import { type Lang, useTranslations } from "@/i18n"
 
-]
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
 ---
 
-<ol class="relative mt-16">
+<ol class="divide-y divide-line">
   {
-    EXPERIENCIE.map((experiencie) => (
-      <li class="">
-        <ExperienceItem {...experiencie} />
+    experience.map((job) => (
+      <li class="grid gap-2 py-8 first:pt-0 last:pb-0 sm:grid-cols-[9.5rem_1fr] sm:gap-6">
+        <p class="font-mono text-xs uppercase tracking-wider text-muted sm:pt-1.5">{job.period[lang]}</p>
+        <div>
+          <h3 class="text-lg font-medium">
+            {job.role[lang]}
+            <span class="text-muted"> · </span>
+            {job.url ? (
+              <a
+                href={job.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1 text-accent hover:underline"
+              >
+                {job.company}
+                <Icon name="arrow" class="size-3.5" />
+              </a>
+            ) : (
+              <span class="text-accent">{job.company}</span>
+            )}
+          </h3>
+          <p class="mt-2 max-w-2xl leading-relaxed text-muted text-pretty">{job.description[lang]}</p>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {job.tags.map((tag) => (
+              <li class="rounded-md border border-line px-2 py-0.5 font-mono text-xs text-muted">{tag}</li>
+            ))}
+          </ul>
+        </div>
       </li>
     ))
   }
 </ol>
+
+<div class="mt-14 grid gap-10 sm:grid-cols-2">
+  <div>
+    <h3 class="font-mono text-xs uppercase tracking-wider text-accent">{t("experience.before")}</h3>
+    <ul class="mt-4 space-y-3 text-sm">
+      {
+        earlierExperience.map((item) => (
+          <li class="flex gap-4">
+            <span class="w-28 shrink-0 font-mono text-xs text-muted">{item.period}</span>
+            <span>
+              {item.role[lang]}
+              <span class="block text-muted">{item.company[lang]}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div>
+    <h3 class="font-mono text-xs uppercase tracking-wider text-accent">{t("experience.education")}</h3>
+    <ul class="mt-4 space-y-3 text-sm">
+      {
+        education.map((item) => (
+          <li class="flex gap-4">
+            <span class="w-28 shrink-0 font-mono text-xs text-muted">{item.period}</span>
+            <span>
+              {item.title[lang]}
+              <span class="block text-muted">{item.center}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
