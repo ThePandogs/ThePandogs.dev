@@ -9,11 +9,11 @@ const { id, index, title } = Astro.props
 ---
 
 <section id={id} class="reveal border-t border-line py-20 md:py-28">
-  <div class="grid gap-10 md:grid-cols-[12rem_1fr]">
+  <div class="grid grid-cols-[minmax(0,1fr)] gap-10 md:grid-cols-[12rem_minmax(0,1fr)]">
     <header class="md:sticky md:top-28 md:self-start">
       <p class="font-mono text-xs text-accent">{index}</p>
       <h2 class="mt-2 text-2xl font-semibold tracking-tight">{title}</h2>
     </header>
-    <div><slot /></div>
+    <div class="min-w-0"><slot /></div>
   </div>
 </section>

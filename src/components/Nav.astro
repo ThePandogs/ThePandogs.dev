@@ -20,9 +20,9 @@ const items = [
 ]
 ---
 
-<header class="fixed inset-x-0 top-0 z-50 px-4 pt-4">
+<header class="fixed inset-x-0 top-0 z-50 px-4 pt-[calc(1rem+env(safe-area-inset-top,0px))]">
   <nav
-    class="mx-auto flex max-w-5xl items-center justify-between rounded-2xl border border-line/80 bg-bg/70 px-4 py-2.5 backdrop-blur-xl"
+    class="relative mx-auto flex max-w-5xl items-center justify-between rounded-2xl border border-line/80 bg-bg/70 px-4 py-2.5 backdrop-blur-xl"
     aria-label={t("nav.label")}
   >
     <a href={homePath(lang)} class="font-mono text-sm font-medium tracking-tight">
@@ -64,11 +64,40 @@ const items = [
         <Icon name="sun" class="hidden size-4 dark:block" />
         <Icon name="moon" class="size-4 dark:hidden" />
       </button>
+      <details id="mobile-menu" class="group md:hidden">
+        <summary
+          class="grid size-9 cursor-pointer list-none place-items-center rounded-lg text-muted transition hover:bg-surface hover:text-fg [&::-webkit-details-marker]:hidden"
+          aria-label={t("nav.menu")}
+        >
+          <Icon name="menu" class="size-5 group-open:hidden" />
+          <Icon name="close" class="hidden size-5 group-open:block" />
+        </summary>
+        <ul class="absolute inset-x-0 top-full mt-2 grid gap-1 rounded-2xl border border-line/80 bg-bg/95 p-2 shadow-lg backdrop-blur-xl">
+          {
+            items.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="block rounded-lg px-3 py-3 text-base text-fg transition hover:bg-surface"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </details>
     </div>
   </nav>
 </header>
 
 <script>
+  const menu = document.getElementById("mobile-menu") as HTMLDetailsElement | null
+  menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => (menu.open = false)))
+  document.addEventListener("click", (e) => {
+    if (menu?.open && !menu.contains(e.target as Node)) menu.open = false
+  })
+
   document.getElementById("theme-toggle")?.addEventListener("click", () => {
     const dark = document.documentElement.classList.toggle("dark")
     try {
