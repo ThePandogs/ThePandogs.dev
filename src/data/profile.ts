@@ -289,6 +289,7 @@ export const projects: Project[] = [
     },
     tags: ["Python", "LangGraph", "PostgreSQL", "React", "Docker"],
     private: true,
+    status: { es: "En desarrollo", en: "In development" },
   },
   {
     title: "PandUI",
@@ -298,6 +299,7 @@ export const projects: Project[] = [
     },
     tags: ["Unity", "C#", "UI Toolkit", "UPM"],
     private: true,
+    status: { es: "En desarrollo", en: "In development" },
   },
   {
     title: "Imperat",
